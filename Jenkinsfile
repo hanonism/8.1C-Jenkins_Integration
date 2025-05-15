@@ -2,34 +2,52 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                git branch: 'main', url: ' https://github.com/your_github_username/8.2CDevSecOps.git'
+                echo "Build the code using a build automation tool to compile and package code"
+                echo "Gradle, Maven, npm"
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Unit and Integration Tests') {
             steps {
-                bat 'npm install'
+                echo "Run unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected"
+                echo "JUnit"
             }
         }
 
-        stage('Run Tests') {
+        stage('Code Analysis') {
             steps {
-                bat 'npm test || exit /b 0' // Allows pipeline to continue despite test failures
+                echo "Integrate a code analysis tool to analyse the code and ensure it meets industry standards"
+                echo "SonarQube"
             }
         }
 
-        stage('Generate Coverage Report') {
+        stage('Security Scan') {
             steps {
-            // Ensure coverage report exists
-                bat 'npm run coverage || exit /b 0'
+                echo "Perform a security scan on the code using a tool to identify any vulnerabilities"
+                echo "Snyk"
             }
         }
 
-        stage('NPM Audit (Security Scan)') {
+        stage('Deploy to Staging') {
             steps {
-                bat 'npm audit || exit /b 0' // This will show known CVEs in the output
+                echo "Deploy the application to a staging server"
+                echo "Ansible"
+            }
+        }
+
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "Run integration tests on the staging environment to ensure the application functions as expected in a production-like environment."
+                echo "Selenium"
+            }
+        }
+
+        stage('Deploy to Production') {
+            steps {
+                echo "Deploy the application to a production server"
+                echo "Terraform"
             }
         }
     }
