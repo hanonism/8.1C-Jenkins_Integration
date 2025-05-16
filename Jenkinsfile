@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Build the code using a build automation tool to compile and package code"
-                echo "Gradle, Maven"
+                echo "Gradle, Maven, npm"
             }
         }
 
